@@ -1,10 +1,13 @@
 import dev_db_session  from "../index.js";
+import {contactsUpload} from "../database/queries.js"
 
-
-export const addContacts=(req,res)=>{
+export const addContacts=async (req,res)=>{
   try {
-   const {data}= req.body;
-    console.log(data)
+   const {contacts}= req.body.body;
+    const driver=await dev_db_session()
+    const session=driver.session()
+const result= await session.run(contactsUpload, { contacts })
+session.close()
     res.send("recieved")
   } catch (error) {
     console.log(error);

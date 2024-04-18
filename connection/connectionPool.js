@@ -54,9 +54,9 @@ import neo4j from "neo4j-driver";
 
 const devDatabaseConnection = async () => {
   // URI examples: 'neo4j://localhost', 'neo4j+s://xxx.databases.neo4j.io'
-  const URI = process.env.db_uri;
-  const USER = process.env.db_userName;
-  const PASSWORD = process.env.db_password;
+   const URI = process.env.db_uri
+  const USER =process.env.db_username
+  const PASSWORD =process.env.db_password
   let driver;
   
   try {

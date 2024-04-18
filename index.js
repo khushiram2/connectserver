@@ -11,7 +11,6 @@ dotenv.config()
 
 
 const dev_db_session= devDatabaseConnection
-
 const app=express();
 app.use(cors())
 app.use(express.json());
