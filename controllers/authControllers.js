@@ -4,7 +4,7 @@ import {registerNewUser,findUserByPhoneOrEmail} from "../database/queries.js"
 import dev_db_session from '../index.js'
 import crypto from "crypto"
 import {genNewToken} from "../utils/tokenUtils.js";
-
+import sendSMS from "../utils/amzonSns.js";
 export const registerController=async (req,res)=>{
 	try{
     const driver=await dev_db_session()
@@ -53,6 +53,20 @@ export const loginController=async (req,res) => {
     console.log(error)
     res.status(500).send({message:"internal server error"})
   }
+}
+
+export const sendOTP=async(req,res)=>{
+try {
+    console.log(req.body)
+  const {number}=req.body
+const otp=await crypto.randomUUID()
+    const message= `your otp for conct.ai is ${otp}`
+    const messageSent=await sendSMS(number,message)
+res.send("message sent")
+} catch (error) {
+  console.log(error)
+    res.send("internal server error")
+}
 }
 
 // export const verifyOAUTHToken=()=>{
